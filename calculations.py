@@ -28,30 +28,36 @@ with open("data/gas.csv", 'r') as gascsv, open("data/cci.csv", 'r') as ccicsv:
 
 
     # Plots gas price each month against CCI
-    def plot_data(gas_price, cci_value):
+    def plot_data(gas_price, cci_value, y1, y2):
         plt.xlabel("Gas Prices($)")
         plt.ylabel("Consumer Confidence Index")
         plt.title("Relationships between Gas Prices and the Consumer Confidence Index", weight='bold', y=1.02,
                   fontsize=13)
         plt.text(3, 102, "r= ", fontsize=14)
         plt.text(3.15, 102, r, fontsize=14)
-        plt.scatter(gas_price, cci_value)
+        plt.scatter(gas_price, cci_value, color='k', alpha=.95)
+        plt.plot([0, 4.50], [y1, y2], color='r', lw=2)
+        plt.xlim(0)
+        plt.ylim(y2)
         plt.show()
 
 
     def get_pearsonr(gas_price, cci_value):
-        r, p = stats.pearsonr(gas_price, cci_value)
-        return r, p
+        slope, intercept, r_value, p_value, std_err = stats.linregress(gas_price, cci_value)
+        y1 = intercept
+        y2 = float(slope) * (4.50) + float(intercept)
+        return r_value, p_value, y1, y2
 
 
     # Prepares raw data into two lists: gas_x and cci_y
     gas_x, cci_y = prepare_scatter()
 
+    # This code won't run when imported
     if __name__ == "__main__":
         # Calculates the Pearson Correlation Coefficient
-        r, p = get_pearsonr(gas_x, cci_y)
+        r, p, y1, y2 = get_pearsonr(gas_x, cci_y)
         # Plot gas price against cci index
-        plot_data(gas_x, cci_y)
+        plot_data(gas_x, cci_y, y1, y2)
 
 
     def created_scatter():
