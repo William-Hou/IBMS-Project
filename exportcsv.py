@@ -34,7 +34,7 @@ def create_dates(months=months, years=years):
 
 
 def write_to_csv(date_list, gas_x, cci_y):
-    with open("finalcsv.csv", "w") as finalcsv:
+    with open("data/finalcsv.csv", "w") as finalcsv:
         # Creates CSV Headers
         finalcsv.write("Date,")
         finalcsv.write("Gas Price,")
@@ -43,7 +43,7 @@ def write_to_csv(date_list, gas_x, cci_y):
         for x, y, z in zip(date_list, gas_x, cci_y):
             temp = str(x) + "," + str(y) + "," + str(z) + "\n"
             finalcsv.write(temp)
-        print "completed!"
+        print("completed!")
 
 
 write_to_csv(create_dates(), gas_x, cci_y)
