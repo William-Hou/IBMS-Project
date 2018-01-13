@@ -33,11 +33,11 @@ with open("data/gas.csv", 'r') as gascsv, open("data/cci.csv", 'r') as ccicsv:
         plt.ylabel("Consumer Confidence Index")
         plt.title("Relationships between Gas Prices and the Consumer Confidence Index", weight='bold', y=1.02,
                   fontsize=13)
-        plt.text(3, 102, "r= ", fontsize=14)
-        plt.text(3.15, 102, r, fontsize=14)
-        plt.scatter(gas_price, cci_value, color='k', alpha=.95)
+        plt.text(3, 102, "r=", fontsize=14)
+        plt.text(3.25, 102, r, fontsize=14)
+        plt.scatter(gas_price, cci_value, color='k', alpha=.90)
         plt.plot([0, 4.50], [y1, y2], color='r', lw=2)
-        plt.xlim(0)
+        plt.xlim(0,5)
         plt.ylim(y2)
         plt.show()
 
